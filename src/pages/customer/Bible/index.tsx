@@ -3,17 +3,19 @@ import { BibleSearchFormValues } from "@/interfaces";
 import createValidationSchemas from "@/schemas";
 import * as Animatable from 'react-native-animatable';
 import { Formik } from "formik";
-import React, { useState, useMemo, useCallback } from "react";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Divider } from "react-native-elements";
+import * as Speech from 'expo-speech';
 
 import '@/utils/translations/i18n'
 import { useTranslation } from 'react-i18next'
 
 export default function Bible() {
   const { t, i18n } = useTranslation();
-  
   const [verseText, setVerseText] = useState("");
+  const [speaking, setSpeaking] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const { BibleSearchValidationSchema } = createValidationSchemas()
 
@@ -29,6 +31,24 @@ export default function Bible() {
     { label: "Versículo 1", value: "1" },
     { label: "Versículo 2", value: "2" },
   ], []);
+
+  const handleSpeak = useCallback(() => {
+    if (!speaking) {
+      Speech.speak(verseText, {
+        language: 'pt-BR',
+        onDone: () => setSpeaking(false),
+        onStart: () => setSpeaking(true),
+        onPause: () => setPaused(true),
+        onResume: () => setPaused(false),
+      });
+    } else if (paused) {
+      Speech.resume();
+      setPaused(false);
+    } else {
+      Speech.pause();
+      setPaused(true);
+    }
+  }, [verseText, speaking, paused]);
 
   const handleFetchVerse = useCallback((values: BibleSearchFormValues) => {
     let apiUrl = '';
@@ -47,6 +67,12 @@ export default function Bible() {
       .catch(() => {
         setVerseText(`${t("customerPages.bible.fetch.error")}`);
       });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      Speech.stop();
+    };
   }, []);
 
   return (
@@ -72,7 +98,19 @@ export default function Bible() {
               <Text style={styles.buttonText}>{t("customerPages.bible.search")}</Text>
             </TouchableOpacity>
 
-            <Divider />
+            {verseText && (
+              <View style={styles.actions}>
+                <TouchableOpacity style={styles.action} onPress={handleSpeak}>
+                  <Icon name={paused ? "play-arrow" : speaking ? "pause" : "speaker-phone"} size={20} color="#fff" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.action}>
+                  <Icon name="bookmark-border" size={20} color="#fff" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.action}>
+                  <Icon name="share" size={20} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            )}
 
             {verseText ? (
               <>
@@ -90,7 +128,6 @@ export default function Bible() {
           </ScrollView>
         )}
       </Formik>
-
     </View>
   );
 }
@@ -106,8 +143,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 16,
     paddingVertical: 8,
-    marginTop: 14,
-    marginBottom: 40,
+    marginVertical: 14,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -143,4 +179,13 @@ const styles = StyleSheet.create({
     marginBottom: '8%',
     paddingStart: '5%',
   },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  action: {
+    backgroundColor: '#158F97',
+    padding: 20,
+    borderRadius: 50
+  }
 });
