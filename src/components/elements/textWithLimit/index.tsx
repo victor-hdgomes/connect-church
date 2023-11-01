@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import '@/utils/translations/i18n'
 import { useTranslation } from 'react-i18next'
 
-export const TextWithLimit: React.FC<{ text: string, characterLimit: number }> = ({ text, characterLimit }) => {
+export const TextWithLimit: React.FC<{ style: any, text: string, characterLimit: number }> = ({ style, text, characterLimit }) => {
     const { t } = useTranslation();
 
     const [showAll, setShowAll] = useState(false);
@@ -17,7 +17,7 @@ export const TextWithLimit: React.FC<{ text: string, characterLimit: number }> =
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
+        <Text style={[styles.text, style]}>
                 {displayText}
                 {text.length > characterLimit && (
                     <Text onPress={toggleShowAll} style={styles.buttonText}>
