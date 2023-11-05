@@ -8,7 +8,7 @@ export function signIn(values: LoginFormValues): Promise<ResponseLogin> {
                 user: {
                     name: 'Diego',
                     email: values.email,
-                    level: 'customer',
+                    level: 'church',
                 }
             })
         }, 2000)

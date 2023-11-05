@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/auth";
 import AuthRoutes from "@/routes/auth/auth.routes";
 import ProfessionalRoutes from "@/routes/professional/app.routes";
 import CustomerRoutes from "@/routes/customer/app.routes";
+import ChurchRoutes from "@/routes/church/app.routes"
 
 const Routes: React.FC = () => {
     const { user, signed, loading } = useAuth();
@@ -23,6 +24,8 @@ const Routes: React.FC = () => {
                 return <ProfessionalRoutes />
             case 'customer':
                 return <CustomerRoutes />
+            case 'church':
+                return <ChurchRoutes />
         }
     }
 

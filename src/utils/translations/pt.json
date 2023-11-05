@@ -59,6 +59,35 @@
             "settings.termsSubtitle": "Conheça as nossas políticas",
             "settings.signOut": "Sair"
         },
+        "churchPages": {
+            "home.search.placeholder": "Buscar profissional ou serviço",
+
+            "notifications.tab.all": "Todas",
+            "notifications.tab.unread": "Não lidas",
+
+            "bible.language.pt": "Almeida",
+            "bible.fetch.error": "Erro ao buscar o versículo.",
+            "bible.book": "Livro",
+            "bible.chapter": "Capítulo",
+            "bible.verse": "Versículo",
+            "bible.search": "Buscar",
+            "bible.result": "Resultado da busca:",
+            "bible.noSearch": "Você ainda não fez nenhuma busca",
+
+            "settings.myProfile": "Meu perfil",
+            "settings.accountType.professional": "Profissional",
+            "settings.accountType.customer": "Cliente",
+            "settings.accountType.church": "Igreja",
+            "settings.changeAccount": "Alterar conta",
+            "settings.settings": "Configurações",
+            "settings.help": "Ajuda",
+            "settings.helpSubtitle": "Tire suas dúvidas aqui",
+            "settings.terms": "Termos",
+            "settings.termsSubtitle": "Conheça as nossas políticas",
+            "settings.language": "Idioma",
+            "settings.languageSubtitle": "Altere o idioma",
+            "settings.signOut": "Sair"
+        },
         "professionalRoutes": {
             "appRoutes.back": "Voltar",
             "appRoutes.notifications": "Notificações",
@@ -79,6 +108,16 @@
             "tabRoutes.schedule": "Agenda",
             "tabRoutes.settings": "Configurações"
         },
+        "churchRoutes": {
+            "appRoutes.back": "Voltar",
+            "appRoutes.notifications": "Notificações",
+            "appRoutes.editProfile": "Editar Perfil Igreja",
+
+            "tabRoutes.home": "Home",
+            "tabRoutes.bible": "Bíblia",
+            "tabRoutes.schedule": "Agenda",
+            "tabRoutes.settings": "Configurações"
+        },
         "components": {
             "carousel.companiesCarousel.companies": "Empresas",
             "carousel.recentProfessionalsCarousel.recentProfessionals": "Profissionais recentes",
@@ -90,11 +129,14 @@
             "header.changeAccount.changeAccount": "Alterar conta",
             "header.changeAccount.professional": "Profissional",
             "header.changeAccount.customer": "Cliente",
+            "header.changeAccount.church": "Igreja",
 
             "modalize.changeAccount.changeAccount": "Acessar outra conta",
             "modalize.changeAccount.customer": "Cliente",
             "modalize.changeAccount.professional": "Profissional",
             "modalize.changeAccount.button.changeAccount": "Alterar conta",
+            "modalize.changeLanguage.title": "Alterar idioma",
+            "modalize.changeLanguage.button.changeLanguage": "Alterar idioma",
             "modalize.payment.title": "Pague com pix",
             "modalize.payment.description": "Faça o pagamento com o QR Code ou copie o código para se cadastrar como um profissional no APP!",
             "modalize.payment.dataLabel.value": "Valor",
