@@ -8,18 +8,20 @@ const { width } = Dimensions.get('window')
 
 interface Item {
     image: string,
+    description: string,
+    date: string,
 }
 
-export const MessageOfTheDayCarousel: React.FC<{ data: Item[] }> = ({ data }) => {
+export const FeaturedAgenda: React.FC<{ data: Item[] }> = ({ data }) => {
     const { t } = useTranslation();
 
     return (
         <View style={{ marginBottom: 48 }}>
-            <Text style={styles.information}>{t("components.carousel.companiesCarousel.messageOfTheDay")}</Text>
+            <Text style={styles.information}>{t("components.carousel.featuredAgenda.agenda")}</Text>
             <FlatList
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                snapToOffsets={[...Array(data.length)].map((x, i) => i * (width * .5 - 40) + (i - 1) * 40)}
+                snapToOffsets={[...Array(data.length)].map((x, i) => i * (width * .8 - 40) + (i - 1) * 40)}
                 keyExtractor={item => item.image}
                 horizontal
                 style={{ marginLeft: 10 }}
@@ -34,6 +36,10 @@ export const MessageOfTheDayCarousel: React.FC<{ data: Item[] }> = ({ data }) =>
                         >
                             <View style={styles.shadow}></View>
                         </ImageBackground>
+                        <View style={styles.textContainer}>
+                            <Text style={styles.description}>{item.description}</Text>
+                            <Text style={styles.date}>{item.date}</Text>
+                        </View>
                     </View>
                 )}
             />
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         overflow: 'hidden',
         height: width / 2,
-        width: width * .5 - 20,
+        width: width * .8 - 20,
         marginHorizontal: 10,
     },
     imageBackground: {
@@ -69,4 +75,19 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0
     },
+    textContainer: {
+        padding: 10,
+    },
+    description: {
+        color: '#434343',
+        fontSize: 16,
+        fontWeight: '700',
+        letterSpacing: 1.28
+    },
+    date: {
+        color: '#7B7B7B',
+        fontSize: 14,
+        fontWeight: '600',
+        letterSpacing: .56,
+    }
 });

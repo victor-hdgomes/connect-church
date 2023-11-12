@@ -34,7 +34,7 @@ export const RecentProfessionalsCarousel: React.FC<{ data: Item[] }> = ({ data }
                 snapToOffsets={[...Array(data.length)].map((x, i) => i * (width * .7 - 40) + (i - 1) * 40)}
                 keyExtractor={item => item.name}
                 horizontal
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10, marginBottom: 38 }}
                 snapToAlignment="start"
                 scrollEventThrottle={16}
                 decelerationRate="fast"

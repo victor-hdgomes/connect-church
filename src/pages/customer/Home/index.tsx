@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { CompaniesCarousel } from "@/components/carousel/companiesCarousel";
 import { RecentProfessionalsCarousel } from "@/components/carousel/recentProfessionalsCarousel";
 import { MessageOfTheDayCarousel } from "@/components/carousel/messageOfTheDayCarousel";
+import { FeaturedAgenda } from "@/components/carousel/featuredAgenda";
 
 import { SearchFilter } from "@/components/modalize/searchFilter";
 
@@ -61,6 +62,24 @@ export default function Home() {
     },
   ]
 
+  const featuredAgendaData = [
+    {
+      image: 'https://cdn.pixabay.com/photo/2020/04/24/17/23/blessing-5087820_1280.jpg',
+      description: 'The Blessing Devotional Plan By Kari Jobe',
+      date: '12/11/2023 - Domingo'
+    },
+    {
+      image: 'https://cdn.pixabay.com/photo/2014/08/22/01/39/hands-423794_1280.jpg',
+      description: 'The Blessing Devotional Plan By Kari Jobe',
+      date: '12/11/2023 - Domingo'
+    },
+    {
+      image: 'https://cdn.pixabay.com/photo/2015/04/03/18/56/font-705667_1280.jpg',
+      description: 'The Blessing Devotional Plan By Kari Jobe',
+      date: '12/11/2023 - Domingo'
+    },
+  ]
+
   const modalizeRef = useRef<Modalize | null>(null);
 
   const onOpen = useCallback(() => {
@@ -75,7 +94,7 @@ export default function Home() {
         <CompaniesCarousel data={productsCarouselData} />
         <MessageOfTheDayCarousel data={messageOfTheDayCarouselData} />
         <RecentProfessionalsCarousel data={RecentProfessionalsCarouselData} />
-        <Text>Agenda em destaque</Text>
+        <FeaturedAgenda data={featuredAgendaData} />
       </ScrollView>
 
       <SearchFilter modalizeRef={modalizeRef} />

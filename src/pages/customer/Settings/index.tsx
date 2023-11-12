@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { ArrowListItem } from "@/components/elements/arrowListItem";
 import { Modalize } from 'react-native-modalize'
 import { ChangeAccount } from "@/components/modalize/changeAccount";
+import { ChangeLanguage } from "@/components/modalize/changeLanguage";
 import { useAuth } from "@/contexts/auth";
 
 import '@/utils/translations/i18n'
@@ -23,10 +24,15 @@ export default function Settings() {
   }, [navigation])
 
   const modalizeRef = useRef<Modalize | null>(null);
+  const languageModalizeRef = useRef<Modalize | null>(null);
 
   const onOpen = useCallback(() => {
     modalizeRef.current?.open()
   }, [modalizeRef])
+
+  const onOpenLanguage = useCallback(() => {
+    languageModalizeRef.current?.open()
+  }, [languageModalizeRef])
 
   return (
     <View style={styles.container}>
@@ -57,11 +63,13 @@ export default function Settings() {
       </View>
 
       <ChangeAccount modalizeRef={modalizeRef} />
+      <ChangeLanguage modalizeRef={languageModalizeRef} />
 
       <Text style={styles.title}>{t("customerPages.settings.settings")}</Text>
       <ScrollView>
         <ArrowListItem icon="question-circle" title={t("customerPages.settings.help")} subtitle={t("customerPages.settings.helpSubtitle")} />
         <ArrowListItem icon="shield-alt" title={t("customerPages.settings.terms")} subtitle={t("customerPages.settings.termsSubtitle")} />
+        <ArrowListItem icon="globe-americas" title={t("churchPages.settings.language")} subtitle={t("churchPages.settings.languageSubtitle")} onPress={onOpenLanguage} />
         <ArrowListItem icon="sign-out-alt" title={t("customerPages.settings.signOut")} onPress={signOut} />
       </ScrollView>
     </View>

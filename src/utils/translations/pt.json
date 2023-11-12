@@ -120,6 +120,8 @@
         },
         "components": {
             "carousel.companiesCarousel.companies": "Empresas",
+            "carousel.companiesCarousel.messageOfTheDay": "Mensagem do dia",
+            "carousel.featuredAgenda.agenda": "Agenda em destaque",
             "carousel.recentProfessionalsCarousel.recentProfessionals": "Profissionais recentes",
             "carousel.recentProfessionalsCarousel.seeProfessional": "Ver profissional",
 

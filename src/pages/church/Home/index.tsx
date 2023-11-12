@@ -1,65 +1,13 @@
 import React, { useCallback, useRef } from "react";
-import { StyleSheet, View, Text } from 'react-native';
-import { SearchFilterInputComponent } from "@/components/inputs/searchFilterInputComponent";
-import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { Modalize } from 'react-native-modalize'
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import '@/utils/translations/i18n'
 import { useTranslation } from 'react-i18next'
 
-import { CompaniesCarousel } from "@/components/carousel/companiesCarousel";
-import { RecentProfessionalsCarousel } from "@/components/carousel/recentProfessionalsCarousel";
-import { MessageOfTheDayCarousel } from "@/components/carousel/messageOfTheDayCarousel";
-
-import { SearchFilter } from "@/components/modalize/searchFilter";
-
 export default function Home() {
   const { t } = useTranslation();
-
-  const productsCarouselData = [
-    {
-      image: 'https://cdn.pixabay.com/photo/2018/05/01/18/21/eclair-3366430_1280.jpg',
-      title: 'Confeitaria',
-      schedules: '74 agendamentos'
-    },
-    {
-      image: 'https://cdn.pixabay.com/photo/2015/07/11/14/53/plumbing-840835_1280.jpg',
-      title: 'Manutenção',
-      schedules: '49 agendamentos'
-    },
-    {
-      image: 'https://cdn.pixabay.com/photo/2018/05/01/18/21/eclair-3366430_1280.jpg',
-      title: 'Confeitaria',
-      schedules: '74 agendamentos'
-    },
-  ]
-
-  const RecentProfessionalsCarouselData = [
-    {
-      image: 'https://cdn.pixabay.com/photo/2018/05/01/18/21/eclair-3366430_1280.jpg',
-      avatar: 'https://cdn.pixabay.com/photo/2018/10/04/11/37/woman-3723444_1280.jpg',
-      name: 'Letícia Antunes',
-      profession: 'Confeiteira'
-    },
-    {
-      image: 'https://cdn.pixabay.com/photo/2018/05/01/18/21/eclair-3366430_1280.jpg',
-      avatar: 'https://cdn.pixabay.com/photo/2018/10/04/11/37/woman-3723444_1280.jpg',
-      name: 'Letícia Antunes',
-      profession: 'Confeiteira'
-    },
-  ]
-
-  const messageOfTheDayCarouselData = [
-    {
-      image: 'https://cdn.pixabay.com/photo/2020/04/24/17/23/blessing-5087820_1280.jpg',
-    },
-    {
-      image: 'https://cdn.pixabay.com/photo/2014/08/22/01/39/hands-423794_1280.jpg',
-    },
-    {
-      image: 'https://cdn.pixabay.com/photo/2015/04/03/18/56/font-705667_1280.jpg',
-    },
-  ]
 
   const modalizeRef = useRef<Modalize | null>(null);
 
@@ -67,19 +15,30 @@ export default function Home() {
     modalizeRef.current?.open()
   }, [modalizeRef])
 
+  const data = [
+    { id: '1', text: 'Aniversariante do dia', icon: 'birthday-cake' },
+    { id: '2', text: 'Mensagem rápida', icon: 'bolt' },
+    { id: '3', text: 'Envio de versículo', icon: 'bible' },
+    { id: '4', text: 'Departamentos', icon: 'network-wired' },
+    { id: '5', text: 'Notificações', icon: 'bell' },
+  ];
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity style={styles.itemContainer}>
+      <Icon name={item.icon} size={50} color="#fff" />
+      <Text style={styles.itemText}>{item.text}</Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <View style={styles.container}>
-      <SearchFilterInputComponent onOpen={onOpen} placeholder={t("churchPages.home.search.placeholder")} />
-
-      <ScrollView>
-        <CompaniesCarousel data={productsCarouselData} />
-        <MessageOfTheDayCarousel data={messageOfTheDayCarouselData} />
-        <RecentProfessionalsCarousel data={RecentProfessionalsCarouselData} />
-        <Text>Agenda em destaque</Text>
-      </ScrollView>
-
-      <SearchFilter modalizeRef={modalizeRef} />
-    </View >
+    <ScrollView style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+      />
+    </ScrollView >
   );
 }
 
@@ -87,5 +46,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingHorizontal: 20
   },
+  itemContainer: {
+    backgroundColor: '#158F97',
+    borderRadius: 15,
+    padding: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '48%',
+    marginHorizontal: '1%',
+    marginVertical: 4
+  },
+  itemText: {
+    textAlign: 'center',
+    marginTop: 4,
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600'
+  }
 });
