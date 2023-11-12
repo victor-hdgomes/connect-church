@@ -2,12 +2,15 @@ import React, { useCallback, useRef } from "react";
 import { StyleSheet, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { Modalize } from 'react-native-modalize'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useAuth } from "@/contexts/auth";
 
 import '@/utils/translations/i18n'
 import { useTranslation } from 'react-i18next'
 
 export default function Home() {
   const { t } = useTranslation();
+
+  const { user } = useAuth()
 
   const modalizeRef = useRef<Modalize | null>(null);
 
@@ -32,6 +35,7 @@ export default function Home() {
 
   return (
     <ScrollView style={styles.container}>
+      <Text style={styles.title}>Olá, {user?.name}</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -64,5 +68,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: '600'
+  },
+  title: {
+    paddingVertical: 20,
+    marginHorizontal: '1%',
+    color: '#158F97',
+    fontSize: 22,
+    marginRight: 10,
+    fontWeight: '700',
+    letterSpacing: .88
   }
 });
